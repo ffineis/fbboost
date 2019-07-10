@@ -1,0 +1,14 @@
+Package: fbboost
+Type: Package
+Title: Boosted-tree-embedded classifier models
+Version: 1.0
+Date: 2018-01-16
+Author: Frank Fineis, Abby Smith, Sebastian Rodriguez
+Maintainer: Frank Fineis <frankfineis2022@u.northwestern.edu>
+Description: Build boosted-tree-embedded classifier models based on Facebook's 2014 ADKDD paper, Practical Lessons from Predicting Clicks on Ads at Facebook.
+License: GPL
+RoxygenNote: 6.0.1
+Imports: xgboost,
+    Rcpp
+Depends: data.table
+LinkingTo: Rcpp
