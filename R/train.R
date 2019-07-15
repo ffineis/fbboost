@@ -81,6 +81,7 @@ XgbWrapper <- function(x, y, cv = FALSE, ...){
 #' - nrounds
 #' - early_stopping_rounds
 #' @param nJobs integer number of cores with which to run grid search
+#' @param seed integer random seed initializer
 #' @param ... optional arguments to xgb.train to be *FIXED* across all hyperparameter combinations.
 #' @return 'xgbcvgrid' list with two elements:
 #' @details
@@ -95,6 +96,7 @@ XgbWrapper <- function(x, y, cv = FALSE, ...){
 #' @importFrom data.table rbindlist
 #' 
 #' @examples
+#' require(data.table)
 #' 
 #' # regression task
 #' hyperDT <- data.table(gamma = c(0.3, 0.7), max_depth = c(3, 6), nrounds = c(10, 30))
@@ -229,7 +231,7 @@ XgbCvGridSearch <- function(x
   # Distribute hyperparameter search over cores.
   cvs <- foreach::foreach(i = seq_along(1:nrow(hyperDT))
                           # , .export = c('xgbArgs', 'hyperDT', 'seed')
-                          , .packages = c('fbboost', 'data.table')) %dopar% {
+                          , .packages = c('data.table')) %dopar% {
     cvArgs <- list()
 
     # Set xgboost param configuration for this hyperparameter setting.
@@ -305,6 +307,7 @@ XgbCvGridSearch <- function(x
 #' @seealso \code{\Link{XgbCvGridSearch}}
 #' 
 #' @example
+#' require(data.table)
 #' 
 #' # gridsearch on multiclass classification task
 #' hyperDT <- data.table(gamma = c(0.3, 0.7), max_depth = c(3, 6), nrounds = c(10, 30))
